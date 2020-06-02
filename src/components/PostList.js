@@ -1,20 +1,48 @@
 import React, { useEffect, useState } from "react";
-import { fetchPosts } from "../actions";
-import { useSelector, useDispatch } from "react-redux";
+// import { fetchPosts } from "../actions";
+// import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
 
 const PostList = () => {
-	const [ posts, getPosts ] = useState("");
-	const selectorPosts = useSelector((state) => state.posts);
-	const dispatch = useDispatch();
+	const [ posts, setPosts ] = useState([]);
+	// const dispatch = useDispatch();
 
 	useEffect(() => {
-		getPosts(fetchPosts());
+		axios
+			.get("https://jsonplaceholder.typicode.com/posts")
+			.then((response) => {
+				console.log(response);
+				setPosts(response.data);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	}, []);
 
-	console.log("Posts: " + { posts });
-	console.log("Selector: " + { selectorPosts });
-	console.log("Dispatch: " + dispatch(fetchPosts));
-	return <div>Post List</div>;
+	// const renderList = () => {
+	// 	return posts.map((post) => {
+	// 		return (
+	// 			<div className="item" key={post.id}>
+	// 				<i className="large middle aligned icon user" />
+	// 				<div className="conten">
+	// 					<div className="description">
+	// 						<h2>{post.title}</h2>
+	// 						<p>{post.body}</p>
+	// 					</div>
+	// 				</div>
+	// 			</div>
+	// 		);
+	// 	});
+	// };
+
+	// console.log("Posts: " + posts);
+
+	// return <div className="ui relaxed divided list">{renderList()}</div>;
+	return (
+		<div className="ui relaxed divided list">
+			<ul>{posts.map((post) => <li key={post.id}>{post.title}</li>)}</ul>
+		</div>
+	);
 };
 
 export default PostList;

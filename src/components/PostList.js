@@ -13,19 +13,23 @@ const PostList = () => {
 		[ dispatch ]
 	);
 
-	return posts.map((post) => {
-		return (
-			<div className="item" key={post.id}>
-				<i className="large middle aligned icon user" />
-				<div className="conten">
-					<div className="description">
-						<h2>{post.title}</h2>
-						<p>{post.body}</p>
+	const renderList = () => {
+		return posts.map((post) => {
+			return (
+				<div className="item" key={post.id}>
+					<i className="large middle aligned icon user" />
+					<div className="conten">
+						<div className="description">
+							<h2>{post.title}</h2>
+							<p>{post.body}</p>
+						</div>
 					</div>
 				</div>
-			</div>
-		);
-	});
+			);
+		});
+	};
+
+	return <div className="ui relaxed divided list">{renderList()}</div>;
 };
 
 export default PostList;

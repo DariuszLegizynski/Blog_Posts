@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { fetchPosts } from "../actions";
+import { fetchPostsAndUsers } from "../actions";
 import { useSelector, useDispatch } from "react-redux";
 import UserHeader from "./UserHeader";
 
@@ -9,7 +9,7 @@ const PostList = () => {
 
 	useEffect(
 		() => {
-			dispatch(fetchPosts());
+			dispatch(fetchPostsAndUsers());
 		},
 		[ dispatch ]
 	);
